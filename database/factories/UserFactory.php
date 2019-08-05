@@ -39,6 +39,8 @@ $factory->define(Pedido::class, function (Faker $faker) {
         'date' => $faker->dateTime(),
         'status' => $faker->randomElement([Pedido::PEDIDO_PENDIENTE, Pedido::PEDIDO_ACEPTADO,
             Pedido::PEDIDO_RECHAZADO, Pedido::PEDIDO_FINALIZADO]),
+        'ubication_origin' => $faker->address,
+        'ubication_destiny' => $faker->address,
         // 'seller_id' => User::inRandomOrder()->first()->id,
         'cliente_id' => User::all()->random()->id,
     ];

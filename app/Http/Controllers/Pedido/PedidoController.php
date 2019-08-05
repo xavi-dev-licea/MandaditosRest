@@ -2,10 +2,11 @@
 
 namespace APIMandaditos\Http\Controllers\Pedido;
 
+use APIMandaditos\Pedido;
 use Illuminate\Http\Request;
-use APIMandaditos\Http\Controllers\Controller;
+use APIMandaditos\Http\Controllers\ApiController;
 
-class PedidoController extends Controller
+class PedidoController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,28 +15,9 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $pedidos = Pedido::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return $this->showAll($pedidos);
     }
 
     /**
@@ -44,42 +26,8 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pedido $pedido)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $this->showOne($pedido);
     }
 }

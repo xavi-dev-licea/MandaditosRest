@@ -3,9 +3,10 @@
 namespace APIMandaditos\Http\Controllers\Movimiento;
 
 use Illuminate\Http\Request;
-use APIMandaditos\Http\Controllers\Controller;
+use APIMandaditos\Movimiento;
+use APIMandaditos\Http\Controllers\ApiController;
 
-class MovimientoController extends Controller
+class MovimientoController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,72 +15,20 @@ class MovimientoController extends Controller
      */
     public function index()
     {
-        //
+        $movimientos = Movimiento::all();
+
+        return $this->showAll($movimientos);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movimiento $movimiento)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $this->showOne($movimiento);
     }
 }

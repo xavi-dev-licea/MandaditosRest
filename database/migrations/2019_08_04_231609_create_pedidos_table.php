@@ -18,6 +18,8 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->string('description', 1000);
             $table->dateTime('date');
+            $table->string('ubication_origin');
+            $table->string('ubication_destiny');
             $table->string('status')->default(Pedido::PEDIDO_PENDIENTE);
             $table->integer('cliente_id')->unsigned();
             $table->timestamps();

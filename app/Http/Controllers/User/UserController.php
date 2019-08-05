@@ -4,9 +4,10 @@ namespace APIMandaditos\Http\Controllers\User;
 
 use APIMandaditos\User;
 use Illuminate\Http\Request;
-use APIMandaditos\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use APIMandaditos\Http\Controllers\ApiController;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json(['data' => $users], 200);
+        return $this->showAll($users);
     }
 
 
@@ -57,7 +58,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
     /**
@@ -114,5 +115,30 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['data' => $user], 200);
+    }
+
+    public function verify($token) 
+    {
+        $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->verified = User::USUARIO_VERIFICADO;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMessage('La cuenta ha sido verificada');
+    }
+
+    public function resend(User $user)
+    {
+        if ($user->esVerificado()) {
+            return $this->errorResponse('Este usuario ya ha sido verificado.', 409);
+        }
+
+        retry(5, function() use ($user) {
+              Mail::to($user)->send(new  UserCreated($user));  
+        }, 100); 
+
+        return $this->showMessage('El correo de verificación se ha reenviado...');
     }
 }
