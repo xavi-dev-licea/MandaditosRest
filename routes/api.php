@@ -20,6 +20,10 @@ Route::resource('clientes', 'Cliente\ClienteController', ['only' => ['index', 's
 Route::resource('clientes.movimientos', 'Cliente\ClienteMovimientoController', ['only' => ['index']]);
 Route::resource('clientes.mandaderos', 'Cliente\ClienteMandaderoController', ['only' => ['index']]);
 Route::resource('clientes.pedidos', 'Cliente\ClientePedidoController', ['except' => ['create', 'show', 'edit']]);
+Route::resource('clientes.pedidos.pendientes', 'Cliente\ClientePedidoPendienteController', ['only' => ['index', 'show']]);
+Route::resource('clientes.pedidos.aceptados', 'Cliente\ClientePedidoAceptadoController', ['only' => ['index', 'show']]);
+Route::resource('clientes.pedidos.rechazados', 'Cliente\ClientePedidoRechazadoController', ['only' => ['index', 'show']]);
+Route::resource('clientes.pedidos.finalizados', 'Cliente\ClientePedidoFinalizadoController', ['only' => ['index', 'show']]);
 /*
 Rutas para los madaderos
 */
