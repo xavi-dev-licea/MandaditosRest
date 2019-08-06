@@ -20,6 +20,9 @@ class User extends Authenticatable
     const USUARIO_VERIFICADO = '1';
     const USUARIO_NO_VERIFICADO = '0';
 
+    const MANDADERO_DISPONIBLE = 'disponible';
+    const MANDADERO_OCUPADO = 'ocupado';
+
     protected $table = 'users';
     protected $dates =[
         'deleted_at'
@@ -28,6 +31,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 
         'email', 
+        'status',
         'password',
         'verified',
         'verification_token',
